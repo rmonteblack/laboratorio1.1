@@ -5,7 +5,7 @@ class Program
     static void Main(string[] args)
     {
         Bienvenida();
-        
+       
         if (VerProductos())
         {
             MostrarProductos();
@@ -13,7 +13,7 @@ class Program
 
         decimal totalCompra = 0;
         bool continuarAgregando = true;
-
+        Console.Clear();
         while (continuarAgregando)
         {
             totalCompra += AgregarProducto();
@@ -90,11 +90,22 @@ class Program
 
     static void Descuento(ref decimal totalCompra)
     {
+        decimal limite = 50.00m;
+        decimal porcentajeDescuento = 0.10m;
 
+        if (totalCompra > limite)
+        {
+            decimal descuento = totalCompra * porcentajeDescuento;
+            totalCompra -= descuento;
+            Console.WriteLine($"Se ha aplicado un descuento de Q{descuento:0.00}.");
+        }
     }
 
     static void Total(decimal totalCompra)
+
     {
+        Console.WriteLine("Usted tiene un descuento y se le fue aplicado");
         Console.WriteLine("El total de su compra es: Q" + totalCompra);
+        
     }
 }
