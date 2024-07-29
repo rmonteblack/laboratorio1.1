@@ -1,16 +1,14 @@
 ﻿using System;
 
-
-class Pogram
+class Program
 {
     static void Main(string[] args)
     {
-        mostrar();
-        Console.Clear();
-
-        if (DeseaVerProductos())
+        Bienvenida();
+        
+        if (VerProductos())
         {
-            MostrarProductosPrecios();
+            MostrarProductos();
         }
 
         decimal totalCompra = 0;
@@ -19,27 +17,27 @@ class Pogram
         while (continuarAgregando)
         {
             totalCompra += AgregarProducto();
-            continuarAgregando = DeseaAgregarOtroProducto();
+            continuarAgregando = OtroProducto();
         }
 
-        AplicarDescuento(ref totalCompra);
-        MostrarTotal(totalCompra);
+        Descuento(ref totalCompra);
+        Total(totalCompra);
     }
 
-}
-static bool DeseaVerProductos()
-{
-    string respuesta = Console.ReadLine();
-    return respuesta.ToLower() == "s";
-}
-static void mostrar()
-{
-    Console.WriteLine("Bienvenido a la tienda Chorrito de agua");
-    Console.WriteLine("Actualmente contamos con 10 productos");
-    Console.WriteLine("Desea ver los productos y su precio ? (s/n)");
-    string respuesta = Console.ReadLine();
-}
-    static void MostrarProductosPrecios()
+    static void Bienvenida()
+    {
+        Console.WriteLine("Bienvenido a la tienda Chorrito de agua");
+        Console.WriteLine("Actualmente contamos con 10 productos");
+        Console.WriteLine("Desea ver los productos y su precio ? (s/n)");
+    }
+
+    static bool VerProductos()
+    {
+        string respuesta = Console.ReadLine();
+        return respuesta.ToLower() == "s";
+    }
+
+    static void MostrarProductos()
     {
         Console.WriteLine("Fresa Q10.00");
         Console.WriteLine("Banano Q4.00");
@@ -48,24 +46,19 @@ static void mostrar()
         Console.WriteLine("Sandía Q7.00");
     }
 
-    static void descuento ()
+    static decimal AgregarProducto()
+    {
+        try
         {
-
+            Console.WriteLine("Ingrese el nombre del producto que desea agregar: ");
+            string nombreProducto = Console.ReadLine().ToLower();
+            decimal precioProducto = ObtenerPrecioProducto(nombreProducto);
+            return precioProducto;
         }
-        static decimal AgregarProducto()
+        catch (Exception ex)
         {
-            try
-            {
-                Console.WriteLine("Ingrese el nombre del producto que desea agregar: ");
-                string nombreProducto = Console.ReadLine().ToLower();
-                decimal precioProducto = ObtenerPrecioProducto(nombreProducto);
-                return precioProducto;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                return 0;
-            }
+            Console.WriteLine("Error: " + ex.Message);
+            return 0;
         }
     }
 
@@ -87,7 +80,21 @@ static void mostrar()
                 throw new Exception("Producto no encontrado.");
         }
     }
+
+    static bool OtroProducto()
+    {
+        Console.WriteLine("Desea agregar otro producto? (s/n)");
+        string respuesta = Console.ReadLine().ToLower();
+        return respuesta == "s";
+    }
+
+    static void Descuento(ref decimal totalCompra)
+    {
+
+    }
+
+    static void Total(decimal totalCompra)
+    {
+        Console.WriteLine("El total de su compra es: Q" + totalCompra);
+    }
 }
-
-
-
