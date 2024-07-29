@@ -6,6 +6,10 @@ class Pogram
     static void Main(string[] args)
     {
         mostrar();
+        Console.Clear();
+        productosPrecios();
+        agregar();
+
 
     }
     static void mostrar()
@@ -21,10 +25,19 @@ class Pogram
         static void productosPrecios ()
         {
             Console.WriteLine("Fresa Q10.00");
+            string fresa = "Fresa";
             Console.WriteLine("Banano Q4.00");
             Console.WriteLine("Melon Q8.00");
             Console.WriteLine("Piña Q10.00");
             Console.WriteLine("Sandía Q7.00");
+        }
+        static void agregar ()
+        {
+            Console.WriteLine("Que productos desea agregar ?");
+        }
+        static void descuento ()
+        {
+
         }
     }
 }   
